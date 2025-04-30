@@ -1,0 +1,7 @@
+read(x);
+
+write(10 + x);
+
+if (x > 5) {
+    write("Maior que 5");
+}
