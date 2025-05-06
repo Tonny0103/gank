@@ -3,13 +3,13 @@ import org.antlr.v4.runtime.tree.*;
 
 public class TestParser {
     public static void main(String[] args) {
-        String input = new ReadFile("src/main/examples/example.txt").fileContent();
+        String input = new ReadFile("src/main/examples/example.gank").fileContent();
 
-        GankGrammarLexer lexer = new GankGrammarLexer(CharStreams.fromString(input));
+        GankLexer lexer = new GankLexer(CharStreams.fromString(input));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        GankGrammarParser parser = new GankGrammarParser(tokens);
+        GankParser parser = new GankParser(tokens);
 
-        ParseTree tree = parser.program();
+        ParseTree tree = parser.programa();
 
         System.out.println("Árvore de análise gerada: ");
         System.out.println(tree.toStringTree(parser));
