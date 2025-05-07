@@ -1,5 +1,9 @@
+import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+
+import javax.swing.*;
+import java.util.Arrays;
 
 public class TestParser {
     public static void main(String[] args) {
@@ -11,8 +15,14 @@ public class TestParser {
 
         ParseTree tree = parser.programa();
 
-        System.out.println("Árvore de análise gerada: ");
-        System.out.println(tree.toStringTree(parser));
-
+        JFrame frame = new JFrame("Árvore de Análise");
+        TreeViewer viewer = new TreeViewer(
+                Arrays.asList(parser.getRuleNames()),
+                tree);
+        viewer.setScale(1.0);
+        frame.add(new JScrollPane(viewer));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.setVisible(true);
     }
 }

@@ -29,8 +29,7 @@ programa: (declaracao | comando | estruturaControle)* EOF;
 declaracao: EspecificadorDeTipo Identificador ('=' expressao)? PONTO_VIRGULA;
 
 comando:
-    expressao PONTO_VIRGULA
-    | comandoWrite
+    comandoWrite
     | comandoRead
     ;
 
@@ -57,20 +56,20 @@ comandoRead:
     READ ABRE_PARENTESES expressao FECHA_PARENTESES PONTO_VIRGULA;
 
 bloco:
-    ABRE_CHAVES (comando | declaracao | estruturaControle)* FECHA_CHAVES
-    | comando | declaracao
+    ABRE_CHAVES (comando | declaracao | estruturaControle | expressao)* FECHA_CHAVES
+    | comando | declaracao | expressao
     ;
+
 
 expressao:
     valorInt
     | valorString
     | Identificador
     | Identificador OperadorDeIncrementacao
-    | expressao OperadorAritmetico expressao
+    | expressao OperadorDeAtribuicao expressao PONTO_VIRGULA
+    | expressao OperadorAritmetico expressao PONTO_VIRGULA?
     | expressao OperadorLogico expressao
     | ABRE_PARENTESES expressao FECHA_PARENTESES
-    | Identificador OperadorDeAtribuicao expressao
-    | expressao OperadorDeAtribuicao expressao
     ;
 
 valorInt: INTEIRO;
